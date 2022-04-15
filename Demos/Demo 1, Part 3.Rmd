@@ -1,0 +1,44 @@
+---
+title: "Report for Boss"
+author: "KF"
+date: Most recent as of `r format(Sys.time(), '%B %d, %Y')`
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,warning = FALSE,message = FALSE)
+```
+
+```{r}
+library(here)
+
+aaa <- list.files(here("Images"),pattern=".png")
+
+searchTerms <- c("20d","60d")
+
+all_t <- lapply(searchTerms,function(x){
+  grep(x,aaa,value=TRUE)
+})
+
+names(all_t) <- searchTerms
+```
+
+```{r}
+concat <- function(x){
+  c(here("Images",all_t[[x]][[2]]),here("Images",all_t[[x]][[1]]))
+}
+```
+
+## Day 1
+
+```{r}
+knitr::include_graphics(concat(1))
+```
+
+## Day 2
+
+```{r}
+knitr::include_graphics(concat(2))
+```

@@ -1,0 +1,52 @@
+---
+title: "SIG/RIG Presentation - Demo Script"
+author: "KF"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Intro
+
+This script is a demo for my SIG/RIG Presentation using the Titanic dataset obtained from [Kaggle](https://kaggle.com/)
+
+comment
+for
+multiple
+lines
+
+```{r}
+# Load in Packages
+library(tidyverse)
+library(here) #for easy file referencing
+```
+
+```{r}
+# Load in Titanic Dataset
+titanic <- read_csv(here("Sample Data/train.csv"))
+```
+
+```{r}
+# Plot Age vs Fare
+ggplot(data=titanic,aes(x=Age,y=Fare)) +
+  geom_point()
+```
+
+```{r}
+# Plot Age vs Fare, colored by Sex
+ggplot(data=titanic,aes(x=Age,y=Fare,color=Sex)) +
+  geom_point()
+```
+
+Numbered List
+
+1. Item 1
+1. Item 2
+
+
+
+

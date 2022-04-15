@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Learning R, From Zero to Hero</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="KF" />
+    <script src="RIG_Slides_files/header-attrs/header-attrs.js"></script>
+    <link href="RIG_Slides_files/tile-view/tile-view.css" rel="stylesheet" />
+    <script src="RIG_Slides_files/tile-view/tile-view.js"></script>
+    <script src="RIG_Slides_files/xaringanExtra_fit-screen/fit-screen.js"></script>
+    <script type="application/json" id="xaringanExtra-editable-docid">{"id":"xe0c60be06884d448a69ebbb9c2f52fc","expires":14}</script>
+    <script src="RIG_Slides_files/himalaya/himalaya.js"></script>
+    <script src="RIG_Slides_files/js-cookie/js.cookie.js"></script>
+    <link href="RIG_Slides_files/editable/editable.css" rel="stylesheet" />
+    <script src="RIG_Slides_files/editable/editable.js"></script>
+    <script src="RIG_Slides_files/fabric/fabric.min.js"></script>
+    <link href="RIG_Slides_files/xaringanExtra-scribble/scribble.css" rel="stylesheet" />
+    <script src="RIG_Slides_files/xaringanExtra-scribble/scribble.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', function() { window.xeScribble = new Scribble({"pen_color":["#FF0000"],"pen_size":3,"eraser_size":30,"palette":[]}) })</script>
+    <script src="RIG_Slides_files/freezeframe/freezeframe.min.js"></script>
+    <script src="RIG_Slides_files/xaringanExtra-freezeframe/freezeframe-init.js"></script>
+    <script id="xaringanExtra-freezeframe-options" type="application/json">{"selector":"img[src$=\"gif\"]","trigger":"click","overlay":false,"responsive":true,"warnings":true}</script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="widths.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+
+
+class: inverse,center,middle
+
+background-image: url("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpapercave.com%2Fwp%2Fwp8737359.png&amp;f=1&amp;nofb=1")
+background-size: cover
+
+# Learning R, From Beginner to Coding Machine
+
+### A SIG/RIG Presentation
+
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+
+## Kenneth Fond
+
+.pull-left.center.white[
+#### Github: [kenf1](https://github.com/kenf1)
+]
+
+.pull-right.center.white[
+#### Twitter: N/A
+]
+
+---
+
+## Introduction
+
+### Totally informal presentation
+
+.pull-left[
+- with a bit of humor
+
+- and demos!
+]
+
+.pull-right[
+&lt;img src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.lovethispic.com%2Fuploaded_images%2F98303-Let-Me-Help-You-Smile.jpg&amp;f=1&amp;nofb=1" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+## Learning R, Beginner to Coding Machine
+
+--
+
+### Disclaimer:
+
+1. Had **some** prior coding experience (in total &lt; 1 day)
+
+  - 1 hour of Javascript
+
+  - few hours of HTML/CSS
+
+--
+
+1. I ***still*** don't know all the inner workings of R or RStudio IDE
+
+--
+
+1. Did not graduate with honors from **ATE School of R Programming** 😥
+
+.center[![certificate](./Images/certificate.png)]
+
+---
+class: middle 
+
+## My Journey Towards Learning R
+
+### 3 General Stages:
+
+.pull-left[
+1. #### Beginner
+
+1. #### Intermediate
+
+1. #### Advanced
+  
+  - Cutting Edge/Experimental
+]
+
+.pull-right[
+![how much I know about R](https://github.com/allisonhorst/stats-illustrations/raw/master/rstats-artwork/r_rollercoaster.png)
+Artwork by @allison_horst
+]
+
+???
+boundaries between these stages not clearly defined
+
+---
+
+## Beginner Stage
+
+- Started learning R .can-edit[~ 1 year] ago
+
+- Mostly used it for creating plots (ggplot)
+
+.pull-right[
+Example of ggplot
+  ![ggplot](https://ggplot2.tidyverse.org/reference/figures/README-example-1.png)
+]
+
+---
+
+## My First Lines of R Code
+
+![first steps](./Images/dupes.png)
+
+---
+class: middle
+
+### More examples of my beginner code...
+
+.pull-left[
+Plots for 3 Month Timepoint
+
+&lt;img src="./Images/3mo.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+--
+
+.pull-right[
+Plots for 6 Month Timepoint
+
+&lt;img src="./Images/6mo.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+***Notice any similarities?***
+]
+
+*Hint: focus on the first few lines of code for each timepoint*
+
+---
+
+## Intermediate Stage
+
+.pull-left[
+&gt; 1. iris
+
+&gt; 1. mtcars
+
+&gt; 1. titanic
+
+&gt; 1. gapminder
+
+&gt; 1. NHANES
+
+]
+
+--
+
+### What do they have in common?
+
+--
+
+all 5 are publicly available, commonly used, **near clean/tidy datasets**
+
+.pull-right[
+
+&lt;img src="https://github.com/allisonhorst/stats-illustrations/raw/master/rstats-artwork/tidydata_1.jpg" width="100%" style="display: block; margin: auto;" /&gt;
+
+Artwork by @allison_horst
+]
+
+---
+
+## Ex: Titanic Dataset from Kaggle
+
+
+```r
+library(tidyverse)
+library(naniar)
+
+titanic &lt;- read_csv("./Sample Data/train.csv")
+
+vis_miss(titanic)
+```
+
+.pull-left[
+&gt; 1. Load in libraries
+
+&gt; 1. Import dataset
+
+&gt; 1. Create shadow plot
+
+]
+
+.pull-right[
+  ![titanic](https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmiro.medium.com%2Fmax%2F1200%2F1*Jg58aKJa-2VyDYucNaAphQ.jpeg&amp;f=1&amp;nofb=1)
+]
+
+---
+
+## Shadow Plot
+
+&lt;img src="RIG_Slides_files/figure-html/unnamed-chunk-5-1.png" width="100%" /&gt;
+
+***Note***: Each black .can-edit[square] is an empty cell.
+
+---
+
+## Reality
+
+&lt;img src="./Images/shadowplot.png" width=1000 height=500&gt;
+
+---
+
+## Intermediate Stage Summary
+
+1. #### Somewhat interested in what R had to offer
+
+  - speed run through DataCamp R courses (*Thanks Nikos!*)
+
+1. #### Raw data starts rolling in
+  
+  - field day for me!
+
+--
+
+.center[
+***Sometimes...***
+
+  &lt;img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmedia.giphy.com%2Fmedia%2F6fL4ZqndWKpOM%2Fgiphy.gif&amp;f=1&amp;nofb=1"&gt;
+]
+
+---
+
+## Tools/Skills I picked up
+
+.pull-left[
+1. R Markdown
+
+1. Git/GitHub
+
+1. ggplot Customization
+
+1. other R packages within [Tidyverse](https://www.tidyverse.org/):
+  - [lubridate](https://lubridate.tidyverse.org/): working with dates
+  - Regular Expressions &amp; [stringr](https://stringr.tidyverse.org/)
+  - ...
+
+1. Stats/ML
+]
+
+.pull-right[
+  ![tidyverse](https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Feducation.rstudio.com%2Fblog%2F2020%2F07%2Fteaching-the-tidyverse-in-2020-part-1-getting-started%2Fimg%2Ftidyverse-packages.png&amp;f=1&amp;nofb=1)
+]
+
+---
+
+## R Markdown
+
+.left-column[
+1. Organize **code** + **comments/notes** + **output** in a single report
+
+1. Consistency + Reproducibility
+]
+
+.right-column[
+  &lt;img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Falexd106.github.io%2Fintro2R%2Fimages%2Frm_components.png&amp;f=1&amp;nofb=1" width=900 height=500&gt;
+]
+
+???
+for time being, don't worry about what happens behind the scenes
+good thing is you don't have to fully understand it to use it
+
+---
+
+## R Markdown Demo
+
+#### To install:
+
+
+```r
+install.packages("rmarkdown")
+```
+
+"yes" to all dependencies
+
+---
+
+## Helpful R Markdown Resources
+
+#### My suggested order:
+
+1. [RStudio Introduction to R Markdown](https://rmarkdown.rstudio.com/articles_intro.html)
+
+1. YiHui Xie's [One R Markdown Document, Fourteen Demos](https://www.rstudio.com/resources/rstudioconf-2020/one-r-markdown-document-fourteen-demos/) RSTUDIO::CONF 2020 talk
+
+1. YiHui Xie's book: [R Markdown: The Definitive Guide](https://bookdown.org/yihui/rmarkdown/)
+
+???
+very simple -&gt; super complex
+can output other formats like pdf, can even write papers if you know enough markdown + html/css
+
+---
+
+## Advanced Stage
+
+1. #### Learned + implemented more packages
+
+  - domain-specific packages: (caret, tidymodels, mice...)
+  
+  - interactive plots: (plotly, trelliscopejs...)
+  
+  - miscellaneous: (cowplot, data.table, leaflet...)
+
+--
+
+1. #### Optimize for speed and efficiency
+
+  - Build workflows
+
+  - Reusable, dynamic code
+
+--
+
+1. #### Cutting Edge/Experimental
+  
+  - dream of code
+  
+  - nightmares of debugging
+  
+---
+
+## My Coding Workflow
+
+.pull-left[
+1. R Project Folder
+
+1. Set up local [Git](https://git-scm.com/) repo
+
+1. Create R Markdown file
+
+1. Type away!
+
+1. .can-edit[???]
+
+1. .can-edit[???]
+
+1. Profit
+
+]
+
+.pull-right[
+  ![DSworkflow](https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.dataquest.io%2Fwp-content%2Fuploads%2F2019%2F05%2Fwhat-is-data-science-workflow.jpg&amp;f=1&amp;nofb=1)
+]
+
+---
+
+### &lt;img src="https://git-scm.com/images/logos/2color-lightbg@2x.png" width=130 height=50&gt;Explained
+
+.pull-left[
+&lt;br&gt;
+  &lt;iframe width="600" height="338" src="https://www.youtube.com/embed/_0rHU6qAQe0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen&gt;&lt;/iframe&gt;
+]
+
+--
+
+.pull-right[
+![git diagram](https://res.cloudinary.com/practicaldev/image/fetch/s--M_fHUEqA--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://thepracticaldev.s3.amazonaws.com/i/128hsgntnsu9bww0y8sz.png)
+]
+
+???
+play intro (up until 0:26)
+
+---
+
+## Coding Time!
+
+.pull-left[
+  ### Remember this?
+  ![dupes](./Images/dupes.png)
+]
+
+--
+
+.pull-right[
+  ### I can do this:
+  
+
+```r
+results &lt;- trauma_mo3 %&gt;% 
+  select(-contains(c("Left","Right",
+      "Original Exam"...)))
+```
+]
+
+--
+
+### Or this:
+  
+
+```r
+to_remove &lt;- c("Left","Right","Original Exam"...)
+
+results &lt;- trauma_mo3[,!names(trauma_mo3) %in% to_remove]
+```
+
+---
+
+
+```r
+to_remove &lt;- c("Left","Right","Original Exam"...)
+
+get_result &lt;- function(dfName){
+  dfName[,!names(dfName) %in% to_remove]
+}
+
+results_mo3 &lt;- get_result(trauma_mo3)
+results_mo6 &lt;- get_result(trauma_mo6)
+```
+
+--
+
+
+```r
+temp &lt;- list.files(path="./Desktop/Raw Data",pattern=".csv")
+tasked_months &lt;- lapply(temp,read_csv)
+
+names(tasked_months) &lt;- make.names(tasked_months)
+
+to_remove &lt;- c("Left","Right","Original Exam"...)
+
+results &lt;- list()
+
+for(i in 1:length(tasked_months)){
+  temp_name &lt;- names(tasked_months)[i]
+  temp &lt;- tasked_months[[i]]
+  get_result &lt;- function(dfName){
+    dfName[,!names(dfName) %in% to_remove]
+  }
+  results[[temp_name]] &lt;- get_result(temp)
+}
+```
+
+???
+top chunk uses custom function
+bot chunk uses function nested within loop
+
+---
+
+### Add some flavor (and speed) 
+
+.pull-left[
+
+```r
+get_result &lt;- function(dfName){
+  dfName[,!names(dfName) %in% to_remove]
+}
+```
+]
+
+.pull-right[
+&lt;img src="https://los40es00.epimg.net/los40/imagenes/2017/06/22/tecnologia/1498131704_879106_1498131896_noticia_normal.jpg" width=110 height=110&gt;
+]
+
+--
+
+**Alternative:**
+
+.pull-left.w60[
+
+```r
+library(data.table)
+
+fastRemove &lt;- function(dfName,varName,toDF=FALSE){
+  temp &lt;- setDT(dfName)
+  temp &lt;- temp[,!varName,with=FALSE]
+  if(toDF==TRUE){
+    setDF(temp)
+  }else{
+    setDT(temp)
+  }
+}
+```
+]
+
+.pull-right.w35[
+![approves](https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmedia.giphy.com%2Fmedia%2F3o6ZteX8cqJRH4TwQ0%2Fgiphy.gif&amp;f=1&amp;nofb=1)
+]
+
+???
+in theory, does same thing
+in reality, performs much faster since I'm using data.table which does parallel processing (discussion for another time)
+
+---
+
+## Final Boss
+
+#### for now...
+
+
+```r
+library(data.table)
+
+DTfilter &lt;- function(dfName,purpose,varName,toDF=FALSE){
+  temp &lt;- data.table::setDT(dfName)
+  if(purpose=="keep"){ #conditional for purpose
+    temp &lt;- temp[,varName,with=FALSE]
+  }else if(purpose=="remove"){
+    temp &lt;- temp[,!varName,with=FALSE]
+  }else if(purpose!="keep"|purpose!="remove"){
+    stop("Instructions not clear, please try again")
+  }
+  if(toDF==TRUE){ #conditional for output format
+    data.table::setDF(temp)
+  }else{
+    data.table::setDT(temp)
+    message("Currently set to default of class `data.table`.")
+  }
+  return(temp)
+}
+```
+
+???
+why keep it to subsets when you can merge it together?
+there's probably a downside for doing this
+
+---
+
+## Let's test it
+
+### Before
+
+
+
+
+```r
+head(titanic,3)
+```
+
+```
+##   PassengerId Survived Pclass
+## 1           1        0      3
+## 2           2        1      1
+## 3           3        1      3
+##                                                  Name    Sex Age SibSp Parch
+## 1                             Braund, Mr. Owen Harris   male  22     1     0
+## 2 Cumings, Mrs. John Bradley (Florence Briggs Thayer) female  38     1     0
+## 3                              Heikkinen, Miss. Laina female  26     0     0
+##             Ticket    Fare Cabin Embarked
+## 1        A/5 21171  7.2500  &lt;NA&gt;        S
+## 2         PC 17599 71.2833   C85        C
+## 3 STON/O2. 3101282  7.9250  &lt;NA&gt;        S
+```
+
+--
+
+
+```r
+class(titanic)
+```
+
+```
+## [1] "data.frame"
+```
+
+---
+
+### After
+
+
+```r
+test_run &lt;- DTfilter(titanic,"keep",c("Sex","Age","Fare","Embarked"),FALSE)
+```
+
+```
+## Currently set to default of class `data.table`.
+```
+
+--
+
+
+```r
+head(test_run,3)
+```
+
+```
+##       Sex Age    Fare Embarked
+## 1:   male  22  7.2500        S
+## 2: female  38 71.2833        C
+## 3: female  26  7.9250        S
+```
+
+--
+
+
+```r
+class(test_run)
+```
+
+```
+## [1] "data.table" "data.frame"
+```
+
+---
+
+## Tools for Advanced R Users
+
+### Shiny
+
+.pull-left[
+1. Create website/dashboard using R
+
+1. Alternative to Tableau and Power BI
+
+1. Static, interactive, or both
+
+1. Shiny app demo
+]
+
+--
+
+.pull-right[
+  ![Lmm Shiny app](./Images/Proof of concept.png)
+]
+
+???
+sorry, intended for internal use atm
+
+---
+
+### Creating your own package
+
+1. Used to bundle custom functions &amp; datasets
+
+1. Much easier to redistribute (internally or externally)
+
+1. RR package demo
+
+--
+
+.pull-right[
+&lt;iframe width="690" height="388" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen&gt;&lt;/iframe&gt;
+
+]
+
+.footnote[[Rick Roll Lyrics](https://www.youtube.com/watch?v=34Ig3X59_qA)]
+
+???
+[aspect scaling tool](https://www.aspectratiocalculator.com/16-9.html)
+[disguised RR](https://www.youtube.com/watch?v=RvBwypGUkPo)
+
+---
+
+## Even more tools:
+
+1. **rvest** - web scraping
+
+1. **Reticulate** - run Python code alongside R code
+
+1. **Text Mining + Natural Language Processing suite**
+
+.center[
+  ## Inspired by:
+  
+  ![python](https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fblog.insaid.co%2Fwp-content%2Fuploads%2F2019%2F04%2FPython-logo-150x150.jpg&amp;f=1&amp;nofb=1)
+]
+
+---
+
+## Xaringan
+
+1. PowerPoint presentation alternative
+
+.center[
+  .pull-left[
+### Pros
+- benefits of R Markdown
+
+- integrates well with rest of workflow
+
+- lots of customizations
+  ]
+
+  .pull-right[
+### Cons
+- HTML/CSS/JS heavy
+
+- can fall into rabbit hole of customization
+
+- has to be compiled
+  ]
+]
+
+---
+
+.center[
+  ## This entire presentation was made in R with Xaringan!
+  
+  ![mindblown](https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fih0.redbubble.net%2Fimage.400523286.2984%2Fflat%2C550x550%2C075%2Cf.u3.jpg&amp;f=1&amp;nofb=1)
+]
+
+---
+
+&lt;img src="https://github.com/allisonhorst/stats-illustrations/raw/master/rstats-artwork/rmarkdown_wizards.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+Artwork by @allison_horst
+
+---
+
+## KF's Tips/Advice
+
+1. Convert small simple tasks you can do in Excel to R code
+
+--
+
+1. Make temporary variables
+
+--
+
+1. Lots of ways to complete same task
+
+--
+
+1. Debugging
+
+  - StackOverflow
+  
+  - SIG/RIG Slack
+
+--
+
+1. Read:
+
+  - help pages/documentation
+
+  - Online Resources: [Statistics Globe](https://statisticsglobe.com/), [Towards Data Science](https://towardsdatascience.com/), [StatQuest](https://statquest.org/)
+  
+
+???
+no one is stopping you from coding in base R or loading 1000s of packages
+  in latter case, maybe your computer does not have enough RAM to store it in memory and will tap out
+just like R reserves NA, TRUE, FALSE..., have a var that is reserved for temporary stuff
+other than frequently-done tasks, rare someone else will have your exact issue
+  good enough for pointers in correct direction
+  
+---
+
+## Final piece of advice:
+
+1. Ultimately depends on what you want to use R for
+
+  - not most straight-forward at times
+  
+  - sometimes things can get "hacky"
+
+.center[
+    &lt;img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fbookdown.org%2Fyihui%2Frmarkdown-cookbook%2Fimages%2Fworkflow.png&amp;f=1&amp;nofb=1" width=600 height=300&gt;
+]
+
+---
+
+![suggested roadmap](./Images/suggested.png)
+
+---
+
+## Part 2, maybe?
+
+.pull-left[
+#### Didn't have time today to show:
+
+- Semi-auto Excel entry script
+
+- interactive dashboards
+  
+  - flexdashboard, shinydashboard
+
+- in-depth workflow demo
+
+- flowcharts
+
+- copy + paste files
+
+]
+
+--
+
+.pull-right[
+#### Currently learning/working on:
+
+- Stats/ML stuff
+
+  - different algorithms
+  
+  - ensembles
+
+- working with pdfs (CRUD)
+
+- using a different IDE
+
+]
+
+---
+class: center,middle
+
+## Thanks for sticking around!
+
+&lt;br&gt;
+
+![mic drop](https://i0.wp.com/boingboing.net/wp-content/uploads/2016/04/micerop.gif?fit=1&amp;resize=620%2C4000&amp;ssl=1)
+
+&lt;br&gt;
+&lt;br&gt;
+
+Those &lt;u&gt;3 full days&lt;/u&gt; creating and customizing this presentation was **definitely** well spent.
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"slideNumberFormat": "%current%",
+"highlightStyle": "atom-one-light",
+"highlightLines": true,
+"ratio": "16:9",
+"countIncrementalSlides": true
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
