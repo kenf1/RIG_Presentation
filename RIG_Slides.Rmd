@@ -1,5 +1,5 @@
 ---
-title: "Learning R, From Zero to Hero"
+title: "SIG/RIG Presentation"
 subtitle:
 author: "KF"
 output:
@@ -88,7 +88,7 @@ knitr::include_graphics("https://external-content.duckduckgo.com/iu/?u=http%3A%2
 
 ---
 
-## Learning R, Beginner to Coding Machine
+## From Beginner to Coding Machine
 
 --
 
