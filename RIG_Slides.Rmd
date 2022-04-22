@@ -65,7 +65,7 @@ background-size: cover
 ]
 
 .pull-right.center.white[
-#### Twitter: N/A
+#### Twitter: [@kenf_1](https://twitter.com/kenf_1)
 ]
 
 ---
@@ -619,8 +619,6 @@ class(test_run)
 1. Shiny app demo
 ]
 
---
-
 .pull-right[
   ![Lmm Shiny app](./Images/Proof of concept.png)
 ]
@@ -660,6 +658,8 @@ sorry, intended for internal use atm
 1. **Reticulate** - run Python code alongside R code
 
 1. **Text Mining + Natural Language Processing suite**
+
+--
 
 .center[
   ## Inspired by:
